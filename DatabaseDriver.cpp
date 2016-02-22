@@ -9,15 +9,15 @@ int main(void)
 
 	for (;;) { // loop forever
 		// Output to standard output
-		cout << "Enter a number (or q to quit) and press return... " << endl;
+		cout << "\nEnter a number (or q to quit) and press return... " << endl;
 		cout << "0: Add student" << endl;
 		cout << "1: Read database" << endl;
 		cout << "2: Save database" << endl;
 		cout << "3: Display given student data" << endl;
 		cout << "4: Grade student" << endl;
 		cout << "q: Quit" << endl;
-		// Read in an integer from standard input
 
+		// Read in an integer from standard input
 		cin >> x;
 		if (x == 'q') break;
 		int num = (int)x - 48;
@@ -57,22 +57,25 @@ void selected(int num)
 			}else{
 				cout << "With class record: " << classrec << endl;
 			}
-
 			WLBCAR002::add_student(name, surname, studnum, classrec);
 			break;
 		case 1:
-			cout << "Function ReadDatabase() called." << endl;
 			WLBCAR002::read_database();
 			break;
 		case 2:
-			cout << "Function SaveDatabase() called." << endl;
 			WLBCAR002::save_database();
 			break;
 		case 3:
-			cout << "Function DisplayDatabase() called." << endl;
+			getline(cin, name);
+			cout << "Enter student number of student to display:" << endl;
+			getline(cin, studnum);
+			WLBCAR002::display_database(studnum);
 			break;
 		case 4:
-			cout << "Function GradeStudent() called." << endl;
+			getline(cin, name);
+			cout << "Enter student number of student to grade:" << endl;
+			getline(cin, studnum);
+			WLBCAR002::grade_student(studnum);
 			break;
 		default:
 			cout << "Please enter a valid number [1 to 4]" << endl;

@@ -14,7 +14,7 @@ void read_database();
 
 void save_database();
 
-std::string display_database(std::string stdnum);
+void display_database(std::string stdnum);
 
 void grade_student(std::string stdnum);
 

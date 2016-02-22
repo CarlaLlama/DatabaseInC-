@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
+#include <sstream>
 #include <iterator>
 using namespace std;
 
@@ -21,14 +22,41 @@ void WLBCAR002::add_student(string name, string surname, string stdnum, string c
 }
 
 void WLBCAR002::read_database(){
-	string db;
+	
 	ifstream ifs("databaseFile.txt");
 
-	if(){
-		
+	if(!ifs){
+		cout << "File not found.";
+		return;
 	}
-	ifs >> db;
-	cout << db;
+
+	string db;
+
+	while(getline(ifs, db, '\n')){
+		WLBCAR002::StudentRecord sr;
+		istringstream iss(db);
+		string current;
+		int cnt = 1;
+
+		while(getline(iss, current, ' ')){
+			if(cnt==1){
+				sr.Name = current;
+			}
+			else if(cnt==2){
+				sr.Surname = current;
+			}
+			else if(cnt==3){
+				sr.StudentNumber = current;
+			}
+			else{
+				sr.ClassRecord += current + " ";
+			}
+			cnt++;
+		}
+		database.push_back(sr);
+		db="";
+	}
+	cout << "Student details successfully read from databaseFile.txt.\n";
 	ifs.close();
 }
 
@@ -40,14 +68,48 @@ void WLBCAR002::save_database(){
 	}
 	out << writeout;
 	out.close();
+	cout << "Database saved to databaseFile.txt.\n";
 }
 
-string WLBCAR002::display_database(string stdnum){
-	//i = std::find_if(AllStudentRecords.begin(), AllStudentRecords.end(), boost::bind(&AllStudentRecords::StudentNumber, _1) == stdnum);
+void WLBCAR002::display_database(string stdnum){
+	string output;
+	for(int i = 0; i < database.size(); i++){
+		if(database[i].StudentNumber == stdnum){
+			output = "Student: " + database[i].Name + " " + database[i].Surname + "\n";
+			output += "Student Number: " + database[i].StudentNumber + "\n";
+			output += "Class record: " + database[i].ClassRecord + "\n";
+		}
+	}
+	if(output == ""){
+		cout << "No such student exists in the database.";
+	}else{
+		cout << output;
+	}
 }
 
 void WLBCAR002::grade_student(string stdnum){
-
+	string marks;
+	int sum;
+	int count;
+	for(int i = 0; i < database.size(); i++){
+		if(database[i].StudentNumber == stdnum){
+			marks = database[i].ClassRecord;
+			istringstream iss(marks);
+			string mark;
+			while(getline(iss, mark, ' ')){
+				int num;
+				num = atoi(mark.c_str());
+				sum += num;
+				count++;
+				mark = "";
+			}
+		}
+	}
+	double average = (double)sum/count;
+	ostringstream ss;
+	ss << average;
+	string stravg(ss.str());
+	cout << "Average:" + stravg;
 }
 
 
