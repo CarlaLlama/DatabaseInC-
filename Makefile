@@ -1,15 +1,16 @@
 CXX=g++
 
-fact:	Factorial.o FactorialDriver.o
-	$(CXX) Factorial.o FactorialDriver.o -o fact
+db:	database.o DatabaseDriver.o
+	$(CXX) database.o DatabaseDriver.o -o db
 
-Factorial.o:	factorial.cpp factorial.h
-	$(CXX) factorial.cpp -c
+database.o:	database.cpp database.h
+	$(CXX) database.cpp -c
 
-FibDriver.o:	FibDriver.cpp Fib.h
-	$(CXX) FibDriver.cpp -c
+DatabaseDriver.o:	DatabaseDriver.cpp database.h
+	$(CXX) DatabaseDriver.cpp -c
 
 clean:
-	@rm -f *.o fib
+	@rm -f *.o db
 
-
+run:
+	./db
