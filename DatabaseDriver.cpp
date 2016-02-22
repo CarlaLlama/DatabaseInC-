@@ -1,15 +1,21 @@
+/**
+*.cpp Database Driver File
+* Carla Wilby 22/02/2016
+*/
 #include "database.h"
 using namespace std;
+
 void selected(int num);
 void clear(void);
 
 int main(void)
 {
+	// Choice char
 	char x;
-
-	for (;;) { // loop forever
+	for (;;) {
 		// Output to standard output
 		cout << "\nEnter a number (or q to quit) and press return... " << endl;
+		cout << "NB: All values are Case Sensitive!" << endl;
 		cout << "0: Add student" << endl;
 		cout << "1: Read database" << endl;
 		cout << "2: Save database" << endl;
@@ -20,6 +26,7 @@ int main(void)
 		// Read in an integer from standard input
 		cin >> x;
 		if (x == 'q') break;
+		// Parse char to int
 		int num = (int)x - 48;
 		selected(num);
 	}
@@ -41,7 +48,7 @@ void selected(int num)
 
 	switch(num){
 		case 0:
-			getline(cin, name);
+			getline(cin, name); //clear input stream
 			cout << "Enter student name" << endl;
 			getline(cin, name);
 			cout << "Enter student surname" << endl;
@@ -51,12 +58,7 @@ void selected(int num)
 			cout << "Enter student's class record, (ie 50 65 98, or press enter if N/A)" << endl;
 			getline(cin, classrec);
 			cout << "Adding Student: " << name << " " << surname << " " << studnum << endl;
-			
-			if(classrec == ""){
-				cout << "With no current class record." << endl;
-			}else{
-				cout << "With class record: " << classrec << endl;
-			}
+			cout << "With class record: " << classrec << endl;
 			WLBCAR002::add_student(name, surname, studnum, classrec);
 			break;
 		case 1:
@@ -66,18 +68,19 @@ void selected(int num)
 			WLBCAR002::save_database();
 			break;
 		case 3:
-			getline(cin, name);
+			getline(cin, name); //clear input stream
 			cout << "Enter student number of student to display:" << endl;
 			getline(cin, studnum);
 			WLBCAR002::display_database(studnum);
 			break;
 		case 4:
-			getline(cin, name);
+			getline(cin, name); //clear input stream
 			cout << "Enter student number of student to grade:" << endl;
 			getline(cin, studnum);
 			WLBCAR002::grade_student(studnum);
 			break;
 		default:
+			// If not a valid number
 			cout << "Please enter a valid number [1 to 4]" << endl;
 			break;
 	}

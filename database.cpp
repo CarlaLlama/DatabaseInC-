@@ -13,16 +13,39 @@ vector<WLBCAR002::StudentRecord> database;
 vector<WLBCAR002::StudentRecord>:: iterator i;
 
 void WLBCAR002::add_student(string name, string surname, string stdnum, string classrec){
+	
+	//Check that student number doesn't already exist
+	for(int i = 0; i < database.size(); i++){
+		if(database[i].StudentNumber == stdnum){
+			cout << "Student number already exists.";
+			return;
+		}
+	}
+
+	//Check that all marks are valid integers
+	istringstream iss(classrec);
+	string mark;
+	while(getline(iss, mark, ' ')){
+		int markint;
+		stringstream(mark) >> markint;
+		if(!markint){
+			cout << "Marks must be integers.";
+			return;
+		}
+	}
+
+	//If everything is correct make new student struct
 	WLBCAR002::StudentRecord sr;
 	sr.Name = name;
 	sr.Surname = surname;
 	sr.StudentNumber = stdnum;
 	sr.ClassRecord = classrec;
+	//Add record to vector
 	database.push_back(sr);
 }
 
 void WLBCAR002::read_database(){
-	
+	//Load default file
 	ifstream ifs("databaseFile.txt");
 
 	if(!ifs){
