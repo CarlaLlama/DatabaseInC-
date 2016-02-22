@@ -1,4 +1,5 @@
 #include "database.h"
+using namespace std;
 void selected(int num);
 void clear(void);
 
@@ -8,16 +9,16 @@ int main(void)
 
 	for (;;) { // loop forever
 		// Output to standard output
-		std::cout << "Enter a number (or q to quit) and press return... " << std::endl;
-		std::cout << "0: Add student" << std::endl;
-		std::cout << "1: Read database" << std::endl;
-		std::cout << "2: Save database" << std::endl;
-		std::cout << "3: Display given student data" << std::endl;
-		std::cout << "4: Grade student" << std::endl;
-		std::cout << "q: Quit" << std::endl;
+		cout << "Enter a number (or q to quit) and press return... " << endl;
+		cout << "0: Add student" << endl;
+		cout << "1: Read database" << endl;
+		cout << "2: Save database" << endl;
+		cout << "3: Display given student data" << endl;
+		cout << "4: Grade student" << endl;
+		cout << "q: Quit" << endl;
 		// Read in an integer from standard input
 
-		std::cin >> x;
+		cin >> x;
 		if (x == 'q') break;
 		int num = (int)x - 48;
 		selected(num);
@@ -33,24 +34,48 @@ void clear(void) { system("clear"); }
 
 void selected(int num)
 {
+	string name;
+	string surname;
+	string studnum;
+	string classrec;
+
 	switch(num){
 		case 0:
-			std::cout << "Function AddStudent() called." << std::endl;
+			getline(cin, name);
+			cout << "Enter student name" << endl;
+			getline(cin, name);
+			cout << "Enter student surname" << endl;
+			getline(cin, surname);
+			cout << "Enter student number" << endl;
+			getline(cin, studnum);
+			cout << "Enter student's class record, (ie 50 65 98, or press enter if N/A)" << endl;
+			getline(cin, classrec);
+			cout << "Adding Student: " << name << " " << surname << " " << studnum << endl;
+			
+			if(classrec == ""){
+				cout << "With no current class record." << endl;
+			}else{
+				cout << "With class record: " << classrec << endl;
+			}
+
+			WLBCAR002::add_student(name, surname, studnum, classrec);
 			break;
 		case 1:
-			std::cout << "Function ReadDatabase() called." << std::endl;
+			cout << "Function ReadDatabase() called." << endl;
+			WLBCAR002::read_database();
 			break;
 		case 2:
-			std::cout << "Function SaveDatabase() called." << std::endl;
+			cout << "Function SaveDatabase() called." << endl;
+			WLBCAR002::save_database();
 			break;
 		case 3:
-			std::cout << "Function DisplayDatabase() called." << std::endl;
+			cout << "Function DisplayDatabase() called." << endl;
 			break;
 		case 4:
-			std::cout << "Function GradeStudent() called." << std::endl;
+			cout << "Function GradeStudent() called." << endl;
 			break;
 		default:
-			std::cout << "Please enter a valid number [1 to 4]" << std::endl;
+			cout << "Please enter a valid number [1 to 4]" << endl;
 			break;
 	}
 }
