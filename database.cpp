@@ -131,7 +131,8 @@ void WLBCAR002::grade_student(string stdnum){
 			// Parse marks and add them together
 			while(getline(iss, mark, ' ')){
 				int num;
-				num = atoi(mark.c_str());
+				istringstream ss(mark);
+				ss >> num;
 				sum += num;
 				count++;
 				mark = "";
