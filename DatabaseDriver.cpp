@@ -45,6 +45,7 @@ void selected(int num)
 	string surname;
 	string studnum;
 	string classrec;
+	string filename;
 
 	switch(num){
 		case 0:
@@ -62,10 +63,17 @@ void selected(int num)
 			WLBCAR002::add_student(name, surname, studnum, classrec);
 			break;
 		case 1:
-			WLBCAR002::read_database();
+			getline(cin, name); //clear input stream
+			cout << "Enter filename to read database from:" << endl;
+			getline(cin, filename);
+			WLBCAR002::read_database(filename);
 			break;
 		case 2:
-			WLBCAR002::save_database();
+			getline(cin, name); //clear input stream
+			cout << "Enter filename to save database to:" << endl;
+			cout << "[This will overwrite filename if already exists. MUST end in .txt]" << endl;
+			getline(cin, filename);
+			WLBCAR002::save_database(filename);
 			break;
 		case 3:
 			getline(cin, name); //clear input stream
