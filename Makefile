@@ -1,13 +1,13 @@
 CXX=g++
 
-db:	database.o DatabaseDriver.o
-	$(CXX) database.o DatabaseDriver.o -o db
+db:	database.o driver.o
+	$(CXX) database.o driver.o -o db
 
 database.o:	database.cpp database.h
 	$(CXX) database.cpp -c
 
-DatabaseDriver.o:	DatabaseDriver.cpp database.h
-	$(CXX) DatabaseDriver.cpp -c
+driver.o: driver.cpp database.h
+	$(CXX) driver.cpp -c
 
 clean:
 	@rm -f *.o db

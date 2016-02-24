@@ -10,10 +10,11 @@
 #include <iterator>
 using namespace std;
 
-vector<WLBCAR002::StudentRecord> database;
-vector<WLBCAR002::StudentRecord>:: iterator i;
+namespace WLBCAR002{
 
-void WLBCAR002::add_student(string name, string surname, string stdnum, string classrec){
+vector<StudentRecord> database;
+
+void add_student(string name, string surname, string stdnum, string classrec){
 	
 	//Check that student number doesn't already exist
 	for(int i = 0; i < database.size(); i++){
@@ -36,7 +37,7 @@ void WLBCAR002::add_student(string name, string surname, string stdnum, string c
 	}
 
 	//If everything is correct make new student struct
-	WLBCAR002::StudentRecord sr;
+	StudentRecord sr;
 	sr.Name = name;
 	sr.Surname = surname;
 	sr.StudentNumber = stdnum;
@@ -45,7 +46,7 @@ void WLBCAR002::add_student(string name, string surname, string stdnum, string c
 	database.push_back(sr);
 }
 
-void WLBCAR002::read_database(string filename){
+void read_database(string filename){
 	// Load default file
 	ifstream ifs(filename.c_str());
 
@@ -57,7 +58,7 @@ void WLBCAR002::read_database(string filename){
 	// Stream file contents line by line
 	string db;
 	while(getline(ifs, db, '\n')){
-		WLBCAR002::StudentRecord sr;
+		StudentRecord sr;
 		istringstream iss(db);
 		string current;
 		int cnt = 1;
@@ -86,7 +87,7 @@ void WLBCAR002::read_database(string filename){
 	ifs.close();
 }
 
-void WLBCAR002::save_database(string filename){
+void save_database(string filename){
 	// Save to default file location
 	string writeout;
 	std::ofstream out(filename.c_str());
@@ -100,7 +101,7 @@ void WLBCAR002::save_database(string filename){
 	cout << "Database saved to " + filename + "\n";
 }
 
-void WLBCAR002::display_database(string stdnum){
+void display_database(string stdnum){
 	string output;
 	// Find student with stdnum in database
 	for(int i = 0; i < database.size(); i++){
@@ -118,7 +119,7 @@ void WLBCAR002::display_database(string stdnum){
 	}
 }
 
-void WLBCAR002::grade_student(string stdnum){
+void grade_student(string stdnum){
 	string marks;
 	int sum;
 	int count = 0;
@@ -150,5 +151,4 @@ void WLBCAR002::grade_student(string stdnum){
 		cout << "Average: " + ss.str();
 	}
 }
-
-
+}

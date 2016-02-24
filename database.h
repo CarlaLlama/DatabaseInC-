@@ -7,9 +7,19 @@
 #define DATABASE_H
 #include <iostream> // Include I/O Stream library headers.
 #include <cstdlib>
+#include <vector>
 
 // Define namespace
 namespace WLBCAR002 {
+
+	struct StudentRecord {
+			std::string Name;
+			std::string Surname;
+			std::string StudentNumber;
+			std::string ClassRecord;
+	};
+
+	extern std::vector<StudentRecord>  database;
 
 	void add_student(std::string name, std::string surname, std::string stdnum, std::string classrec);
 
@@ -20,13 +30,6 @@ namespace WLBCAR002 {
 	void display_database(std::string stdnum);
 
 	void grade_student(std::string stdnum);
-
-	struct StudentRecord {
-			std::string Name;
-			std::string Surname;
-			std::string StudentNumber;
-			std::string ClassRecord;
-	};
 
 }
 
