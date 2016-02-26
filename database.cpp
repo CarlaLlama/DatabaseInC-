@@ -7,7 +7,6 @@
 #include <algorithm>
 #include <fstream>
 #include <sstream>
-#include <iterator>
 using namespace std;
 
 namespace WLBCAR002{
@@ -63,8 +62,8 @@ void read_database(string filename){
 		string current;
 		int cnt = 1;
 
-		// For each line, parse on ' ' to get struct members
-		while(getline(iss, current, ' ')){
+		// For each line, parse on '$' to get struct members
+		while(getline(iss, current, '$')){
 			if(cnt==1){
 				sr.Name = current;
 			}
@@ -75,7 +74,7 @@ void read_database(string filename){
 				sr.StudentNumber = current;
 			}
 			else{
-				sr.ClassRecord += current + " ";
+				sr.ClassRecord += current;
 			}
 			cnt++;
 		}
@@ -93,7 +92,7 @@ void save_database(string filename){
 	std::ofstream out(filename.c_str());
 	// Write StudentRecord to string
 	for(int i = 0; i < database.size(); i++){
-		writeout += database[i].Name + " " + database[i].Surname + " " + database[i].StudentNumber + " " + database[i].ClassRecord + "\n";
+		writeout += database[i].Name + "$" + database[i].Surname + "$" + database[i].StudentNumber + "$" + database[i].ClassRecord + "\n";
 	}
 	// Append string to file
 	out << writeout;

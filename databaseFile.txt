@@ -1,4 +1,4 @@
-asdf fda adsfadf 34 32 34
-asdf sadfa dsf3 43 25 
-asdfasdf fdsa 324dsf 34 23 43 
-Carla Wilby WLBCAR002 43 64 56 34 
+asdf$fda$adsfadf$34 32 34
+asdf$sadfa$dsf3$43 25 
+asdfasdf$dsa$324dsf$34 23 43 
+Carla$Wilby$WLBCAR002$43 64 56 34 

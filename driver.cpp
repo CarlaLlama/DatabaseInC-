@@ -5,8 +5,6 @@
 #include "database.h"
 using namespace std;
 
-void selected(int num);
-void clear(void);
 
 int main(void)
 {
@@ -25,21 +23,26 @@ int main(void)
 
 		// Read in an integer from standard input
 		cin >> x;
-		if (x == 'q') break;
+		if (x == 'q'){
+			char opt;
+			cout << "Are you sure you want to quit? All changes will be lost [y/n]" <<endl;
+			cin >> opt;
+			if(opt == 'y') break;
+		}
 		// Parse char to int
 		int num = (int)x - 48;
-		selected(num);
+		WLBCAR002::selected(num);
 	}
 
 	// Clear terminal window
-	clear();
+	WLBCAR002::clear();
 
 	return 0;
 };
 
-void clear(void) { system("clear"); } 
+void WLBCAR002::clear(void) { system("clear"); } 
 
-void selected(int num)
+void WLBCAR002::selected(int num)
 {
 	string name;
 	string surname;

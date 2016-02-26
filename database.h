@@ -12,6 +12,10 @@
 // Define namespace
 namespace WLBCAR002 {
 
+	void selected(int num);
+	
+	void clear(void);
+
 	struct StudentRecord {
 			std::string Name;
 			std::string Surname;
